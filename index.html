@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
-    <meta charset="UTF-8" />
     <link rel="stylesheet" href="src/styles.css" />
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-</head>
-<body>
-    <div id="app"></div>
+  </head>
+  <body>
     <div class="container">
-      <div class="column">
-        <div class="col-12 text-center">
-          <h1 class="rectangle" id="city-heading">Margate</h1>
-          <h2>
-              <p id="current-day-time"></p>
-              <p id="temperature">
-                <span class="temperature-value">35</span
-                ><span class="units">
-                  <a href="#" id="celsius-link">°C</a> |
-                  <a href="#" id="fahrenheit-link">°F</a>
-                </span>
-              </p>
-            </h2>
-          <form class="search-form">
+      <div class="yes">
+        <div class="no">
+          <form class="search-form" class="mb-3">
+            <div class="row">
+              <div class="col-9">
+            <div class="yes">
+            <div class="no">
             <div class="search-input">
-              <input type="text" id="city-input" placeholder="Enter a City" />
-              <button type="submit" class="btn btn-custom">Search</button>
+              <input type="text" id="city-input" placeholder="Enter a City" class="form-control" autocomplete="off" />
+            </div>
+            <div class="col-3">
+                <button type="submit" class="btn btn-custom">Search</button>
+            </div>
             </div>
           </form>
-          <br />
-          <button type="submit" class="btn btn-custom" id="current-location-button">Current</button>
-          <p id="searched-city"></p>
-          <hr />
-<div class="container text-center">
-  <div class="row">
-    <div class="col order-last">
-      <strong>Mon</strong>
-       <p class="temperature">27°C|17°C</p>
+          <div class="look">
+            <h1 id="city"></h1>
+            <ul>
+              <li>Last Updated: <span id="date"></span></li>
+              <li id="description"></li>
+            </ul>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="clearfix temp">
+                  <img src="" alt="Clear" id="icon" class="float-left" />
+                  <div class="float-left">
+                    <strong id="temperature"></strong>
+                    <span class="units"> °C|°F </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <ul>
+                  <li>Humidity: <span id="humidity"></span></li>
+                  <li>wind: <span id="wind"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <small>
+          <a href="https://github.com/SanelisiweDiya/Weather-App">My GitHub</a>
+        </small>
+      </div>
     </div>
-    <div class="col">
-      <strong>Tue</strong>
-      <p class="temperature">20°C|14°C</p>
-    </div>
-    <div class="col order-first">
-     <strong>Wed</strong>
-     <p class="temperature">24°C|17°C</p>
-    </div>
-  </div>
-</div>
-    <hr />
- <a href="https://github.com/SanelisiweDiya/Weather-App">My GitHub</a>
-  <script src="src/index.js"></script>
-    
-</body>
+    <script src="src/index.js"></script>
+  </body>
 </html>
