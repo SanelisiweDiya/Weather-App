@@ -8,6 +8,9 @@ h1 {
   line-height: 28px;
   margin-bottom: 0;
 }
+button:hover {
+  color: blue;
+}
 ul {
   margin: 0;
   padding: 0;
@@ -52,4 +55,13 @@ li::first-letter {
   position: relative;
   font-size: 16px;
   top: -34px;
+}
+
+.temp .active {
+  color: rgb(33, 33, 33);
+  cursor: default;
+}
+
+.temp .active:hover {
+  text-decoration: none;
 }
