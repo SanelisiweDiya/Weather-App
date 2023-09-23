@@ -8,6 +8,9 @@ h1 {
   line-height: 28px;
   margin-bottom: 0;
 }
+button {
+  color: black;
+}
 button:hover {
   color: blue;
 }
@@ -29,6 +32,9 @@ li {
 li::first-letter {
   text-transform: capitalize;
 }
+.look {
+  margin-bottom: 20px;
+}
 .no {
   max-width: 600px;
   margin: 30px auto;
@@ -41,7 +47,7 @@ li::first-letter {
   border-radius: 5px;
 }
 .temp img {
-  margin-right: 10px;
+  margin-right: 5px;
   height: 64px;
   width: 64px;
 }
@@ -64,4 +70,22 @@ li::first-letter {
 
 .temp .active:hover {
   text-decoration: none;
+}
+.forecast {
+  margin-top: 20px;
+  text-align: center;
+  color: #000;
+}
+
+.forecast-date {
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.forecast-temp-min {
+  opacity: 0.5;
+}
+
+.forecast-temp {
+  font-size: 13px;
 }
