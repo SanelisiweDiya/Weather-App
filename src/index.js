@@ -20,6 +20,29 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
+function displayweather() {
+  let forecastElement = document.querySelector("#weather");
+  let days = ["Fri", "Sat", "Sun", "Mon"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+               <div class="forecast-date">Fri</div>
+                 <img
+                  src="http://openweathermap.org/img/wn/50d@2x.png"
+                  alt=""
+                  width="42" />
+                  <div class="forecast-temp">
+                  <span class="forecast-temp-max">27°</span>|<span class="forecast-temp-min">22°</span>
+              </div>
+              </div>
+            </div>`;
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+  });
+}
 
 function showWeather(response) {
   let cityElement = document.querySelector("#city");
@@ -70,7 +93,6 @@ function searchCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showWeather);
 }
-searchCity("Cape Town");
 let Form = document.querySelector(".search-form");
 searchForm.addEventListener("submit", pressSubmit);
 
@@ -79,3 +101,5 @@ fahrenheitLink.addEventListener("click", displayFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsius);
+searchCity("Cape Town");
+displayweather();
