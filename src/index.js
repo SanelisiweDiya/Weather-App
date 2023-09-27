@@ -29,7 +29,7 @@ function displayweather() {
     forecastHTML =
       forecastHTML +
       `<div class="col-2">
-               <div class="forecast-date">Fri</div>
+               <div class="forecast-date">${day}</div>
                  <img
                   src="http://openweathermap.org/img/wn/50d@2x.png"
                   alt=""
@@ -42,6 +42,11 @@ function displayweather() {
     forecastHTML = forecastHTML + `</div>`;
     forecastElement.innerHTML = forecastHTML;
   });
+}
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "49t2939ab263784af1ebee426o787f30";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
 }
 
 function showWeather(response) {
@@ -62,6 +67,7 @@ function showWeather(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
   let celsiusTemperature = response.data.main.temp;
+  getForecast(response.data.coord);
 }
 function pressSubmit() {
   event.preventDefault();
@@ -89,8 +95,9 @@ function displayCelsius(event) {
 let celsiusTemperature = null;
 
 function searchCity(city) {
-  let apiKey = "f09d3949047ab6c9e3bcaf79cf61f619";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = "49t2939ab263784af1ebee426o787f30";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+
   axios.get(apiUrl).then(showWeather);
 }
 let Form = document.querySelector(".search-form");
