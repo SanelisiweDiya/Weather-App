@@ -68,29 +68,27 @@ function getForecast(coordinates) {
 }
 
 function showWeather(response) {
-  let cityElement = document.querySelector("#city");
-  cityElement = response.data.name;
+  let cityElement = document.querySelector("h1");
+  cityElement = response.data.city;
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   let descriptionElement = document.querySelector("#description");
-  descriptionElement.innerHTML = response.data.weather[0].description;
+  descriptionElement.innerHTML = response.data.condition.description;
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
+  let humudityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = response.data.temperature.humidity;
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = "Thursday 15:45";
   let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    "src",
-    `"http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition[0].icon}.png"`
-  );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+  iconElement.setAttribute("src", response.data.condition.icon_url);
   let celsiusTemperature = response.data.main.temp;
   getForecast(response.data.coord);
 }
 function pressSubmit() {
   event.preventDefault();
-  let cityInputElement = document.querySelector("#city-input");
-  searchCity(cityInputElement.value);
+  let cityInputElement = document.querySelector("#city-input").value;
+  searchCity(city);
 }
 function displayFahrenheit(event) {
   event.preventDefault();
@@ -98,7 +96,7 @@ function displayFahrenheit(event) {
 
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
-  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let fahrenheiTemperature = celsiusTemperature;
   temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
 }
 
