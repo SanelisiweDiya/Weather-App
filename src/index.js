@@ -29,7 +29,6 @@ function formatDay(timestamp) {
 function displayweather(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weather");
-  let days = ["Fri", "Sat", "Sun", "Mon"];
 
   let forecastHTML = `<div class="row">`;
   days.forEach(function (forecastDay, index) {
@@ -39,9 +38,7 @@ function displayweather(response) {
         `<div class="col-2">
                <div class="forecast-date">${formatDay(forecastDay.time)}</div>
                  <img
-                src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
-                  forecastDay.condition[0].icon
-                }.png"
+                src="${forecastDay.condition.icon_url}
                   alt=""
                   width="42" />
                   <div class="forecast-temp">
@@ -61,13 +58,14 @@ function displayweather(response) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "49t2939ab263784af1ebee426o787f30";
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeather);
 }
 
 function showWeather(response) {
+  celsiusTemperature = response.data.temperature.current;
+
   let cityElement = document.querySelector("h1");
   cityElement = response.data.city;
   let temperatureElement = document.querySelector("#temperature");
@@ -82,12 +80,11 @@ function showWeather(response) {
   dateElement.innerHTML = "Thursday 15:45";
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute("src", response.data.condition.icon_url);
-  let celsiusTemperature = response.data.main.temp;
-  getForecast(response.data.coord);
+  getForecast(response.data.coordinates);
 }
 function pressSubmit() {
   event.preventDefault();
-  let cityInputElement = document.querySelector("#city-input").value;
+  let city = document.querySelector("#city-input").value;
   searchCity(city);
 }
 function displayFahrenheit(event) {
