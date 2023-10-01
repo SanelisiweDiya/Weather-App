@@ -20,33 +20,51 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
-function displayweather() {
+function formatDay(timestamp) {
+  let date = newDate(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+function displayweather(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weather");
   let days = ["Fri", "Sat", "Sun", "Mon"];
 
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-               <div class="forecast-date">${day}</div>
+  days.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+               <div class="forecast-date">${formatDay(forecastDay.time)}</div>
                  <img
-                  src="http://openweathermap.org/img/wn/50d@2x.png"
+                src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                  forecastDay.condition[0].icon
+                }.png"
                   alt=""
                   width="42" />
                   <div class="forecast-temp">
-                  <span class="forecast-temp-max">27°</span>|<span class="forecast-temp-min">22°</span>
+                  <span class="forecast-temp-max">${Math.round(
+                    forecastDay.temperature.maximum
+                  )}°</span>|
+                  <span class="forecast-temp-min">${Math.round(
+                    forecastDay.temperature.minimum
+                  )}°</span>
               </div>
               </div>
             </div>`;
-    forecastHTML = forecastHTML + `</div>`;
-    forecastElement.innerHTML = forecastHTML;
+    }
   });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
+
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "49t2939ab263784af1ebee426o787f30";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
 }
 
 function showWeather(response) {
@@ -63,7 +81,7 @@ function showWeather(response) {
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
-    `"http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png"`
+    `"http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition[0].icon}.png"`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
   let celsiusTemperature = response.data.main.temp;
@@ -109,4 +127,3 @@ fahrenheitLink.addEventListener("click", displayFahrenheit);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsius);
 searchCity("Cape Town");
-displayweather();
