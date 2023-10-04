@@ -35,8 +35,11 @@ function displayWeather(response) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `<div class="col-2">
-               <div class="forecast-date">${formatDay(forecastDay.time)}</div>
+        `<div class="col">
+        <div class="container text-center">
+          <div class="row align-items-start">
+
+          <div class="forecast-date">${formatDay(forecastDay.time)}</div>
                  <img
                 src="${forecastDay.condition.icon_url}"
                   alt=""
@@ -48,6 +51,8 @@ function displayWeather(response) {
                   <span class="forecast-temp-min">${Math.round(
                     forecastDay.temperature.minimum
                   )}°</span>
+                  </div>
+                  </div>
               </div>
               </div>
             </div>`;
