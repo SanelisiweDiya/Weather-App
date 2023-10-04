@@ -35,7 +35,7 @@ function displayWeather(response) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `<div class="col">
+        `<div class="col-2">
         <div class="container text-center">
           <div class="row align-items-start">
 
