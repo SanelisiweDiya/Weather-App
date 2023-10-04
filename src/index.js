@@ -35,9 +35,7 @@ function displayWeather(response) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `<div class="col-2">
-        <div class="container text-center">
-          <div class="row align-items-start">
+        `<div class="col">
 
           <div class="forecast-date">${formatDay(forecastDay.time)}</div>
                  <img
