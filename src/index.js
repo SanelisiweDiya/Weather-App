@@ -1,5 +1,5 @@
 function formatDate(timestamp) {
-  let date = newDate(timestamp);
+  let date = new Date(timestamp);
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -21,24 +21,24 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 function formatDay(timestamp) {
-  let date = newDate(timestamp * 1000);
+  let date = new Date(timestamp * 1000);
   let day = date.getDay();
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return days[day];
 }
-function displayweather(response) {
+function displayWeather(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weather");
 
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (forecastDay, index) {
+  forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
         `<div class="col-2">
                <div class="forecast-date">${formatDay(forecastDay.time)}</div>
                  <img
-                src="${forecastDay.condition.icon_url}
+                src="${forecastDay.condition.icon_url}"
                   alt=""
                   width="42" />
                   <div class="forecast-temp">
@@ -75,7 +75,7 @@ function showWeather(response) {
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
   let humudityElement = document.querySelector("#humidity");
-  humidityElement.innerHTML = response.data.temperature.humidity;
+  humudityElement.innerHTML = response.data.temperature.humidity;
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = "Thursday 15:45";
   let iconElement = document.querySelector("#icon");
@@ -113,7 +113,7 @@ function searchCity(city) {
 
   axios.get(apiUrl).then(showWeather);
 }
-let Form = document.querySelector(".search-form");
+let searchForm = document.querySelector(".search-form");
 searchForm.addEventListener("submit", pressSubmit);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
